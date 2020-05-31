@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import * as exercises from '../data/exercises.json';
+import { exercisesData } from './exercises';
+
+
+class Exercise {
+  name: string;
+  exercises: any[];
+}
+
+class Calculation {
+  term: string;
+  result: string;
+}
 
 
 @Component({
@@ -8,15 +19,27 @@ import * as exercises from '../data/exercises.json';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   title = 'einmaleins';
-  exercise = '';
+  exercise: Calculation = null;
+  doneExercises: Calculation[] = [];
 
   ngOnInit() {
-  
-    const exercisePart = exercises.[1];
+
+    let exercises: Exercise[] = exercisesData;
+
+    // TODO get name from user selection
+    const exercisePart = exercises.find(x => x.name === "1er Reihe").exercises;
 
     this.exercise = exercisePart[Math.floor(Math.random() * exercisePart.length)];
 
+
+    // TODO if result was right
+    if (true) {
+      this.doneExercises.push(this.exercise);
+    }
+
+    console.log(this.doneExercises);
   }
 
 }
